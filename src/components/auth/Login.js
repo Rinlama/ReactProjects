@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router";
+import { LoginAuthAction } from "../../redux/actions/AuthAction";
 import Footer from "../layout/Footer";
 import Header from "../layout/Header";
 
-function Login() {
+function Login(props) {
+  const { login } = props;
+
+  const [loginState, setLoginState] = useState({});
+  const history = useHistory();
   return (
     <div>
       <Header />
@@ -21,10 +28,22 @@ function Login() {
                 </button>
               </div>
             </div>
-            <form>
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                login(loginState, history);
+              }}
+            >
               <div className="form-group">
                 <label for="InputEmail">Email address</label>
-                <input type="email" className="form-control form-control-sm" />
+                <input
+                  type="email"
+                  className="form-control form-control-sm"
+                  onChange={(event) => {
+                    const email = event.target.value;
+                    setLoginState({ ...loginState, ...{ email } });
+                  }}
+                />
                 <small id="emailHelp" className="form-text text-muted">
                   We'll never share your email with anyone else.
                 </small>
@@ -34,6 +53,10 @@ function Login() {
                 <input
                   type="password"
                   className="form-control form-control-sm"
+                  onChange={(event) => {
+                    const password = event.target.value;
+                    setLoginState({ ...loginState, ...{ password } });
+                  }}
                 />
               </div>
               <button type="submit" className="btn btn-danger btn-sm">
@@ -48,5 +71,18 @@ function Login() {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    user: state,
+  };
+};
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (loginState, history) => {
+      dispatch(LoginAuthAction(loginState, history));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

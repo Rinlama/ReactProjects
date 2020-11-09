@@ -32,10 +32,35 @@ const authreducer = (state = newAuth, action) => {
         isLoggedIn: true,
         user: action.payload,
       };
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${action.payload.jwttoken}`;
       localStorage.setItem("auth", JSON.stringify(newAuthState));
       return newAuthState;
+
+    case AuthActionType.LOGOUT_SUCCESS:
+      localStorage.removeItem("auth");
+      return authState;
+    case AuthActionType.LOGOUT_FAIL:
+      localStorage.removeItem("auth");
+      return authState;
     case AuthActionType.REGISTER_FAIL:
       return state;
+
+    case AuthActionType.LOGIN_SUCCESS:
+      const loginAuthState = {
+        isLoggedIn: true,
+        user: action.payload,
+      };
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${action.payload.jwttoken}`;
+      localStorage.setItem("auth", JSON.stringify(loginAuthState));
+      return loginAuthState;
+
+    case AuthActionType.LOGIN_FAIL:
+      return authState;
+
     default:
       return state;
   }
