@@ -1,13 +1,92 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --blue: #1e90ff;
+  --white: #ffffff;
+  --mute: #767676;
+  --cover: #f8f9fa;
+}
+
+.header {
+  border-bottom: 1px solid #ccc;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: var(--white);
+}
+/* Home page */
+.home-main {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("https://images.unsplash.com/photo-1550949987-33f716ccc232?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1308&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  padding: 50px 0 50px 0;
+  height: 750px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form-control {
+  width: 350px;
+}
+
+/* Sign in page */
+.sign-in-main {
+  background-color: var(--cover);
+  margin-top: 49px;
+  padding: 50px 0 50px 0;
+}
+.sign-in-container {
+  padding: 15px;
+  width: 500px;
+  background-color: var(--white);
+}
+.sign-in-header {
+  text-align: center;
+}
+.sign-in-intro {
+  font-size: 14px;
+}
+
+.footer {
+  border-top: 1px solid #ccc;
+  width: 100%;
+  padding: 50px 0 50px 0;
+}
+.footer-container {
+  padding: 30px 0 30px 0;
+}
+.footer-item {
+  padding: 10px;
+}
+.footer-header {
+  font-size: 14px;
+  font-weight: 550;
+}
+.footer-ul {
+  list-style: none;
+}
+.footer-li {
+  font-size: 14px;
+  color: var(--mute);
+}
+.footer-store {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-store-logo {
+  padding: 10px;
+  width: 220px;
 }
