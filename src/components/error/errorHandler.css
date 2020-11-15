@@ -1,0 +1,16 @@
+.alert-danger {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  justify-content: space-between;
+  animation: slideDown 1s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate3d(0, -150px, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}

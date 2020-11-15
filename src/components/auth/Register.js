@@ -10,9 +10,14 @@ function Register(props) {
   const [userState, setUserstate] = useState({});
   const history = useHistory();
 
+  const [errorHandler, setErrorHandler] = useState({
+    hasError: false,
+    message: "",
+  });
+
   return (
     <div>
-      <Header></Header>
+      <Header errorHandler={errorHandler}></Header>
       <div className="sign-in-main">
         <div className="container d-flex">
           <div className="sign-in-container py-5 m-auto border">
@@ -31,7 +36,7 @@ function Register(props) {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                register(userState, history);
+                register(userState, history, setErrorHandler);
               }}
             >
               <div className="form-group">
@@ -96,8 +101,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: (userState, history) => {
-      dispatch(RegisterAuthAction(userState, history));
+    register: (userState, history, setErrorHandler) => {
+      dispatch(RegisterAuthAction(userState, history, setErrorHandler));
     },
   };
 };

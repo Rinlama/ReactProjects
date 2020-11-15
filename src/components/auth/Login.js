@@ -8,11 +8,16 @@ import Header from "../layout/Header";
 function Login(props) {
   const { login } = props;
 
+  const [errorHandler, setErrorHandler] = useState({
+    hasError: false,
+    message: "",
+  });
+
   const [loginState, setLoginState] = useState({});
   const history = useHistory();
   return (
     <div>
-      <Header />
+      <Header errorHandler={errorHandler} />
       <div className="sign-in-main">
         <div className="container d-flex">
           <div className="sign-in-container py-5 m-auto border">
@@ -31,7 +36,7 @@ function Login(props) {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                login(loginState, history);
+                login(loginState, history, setErrorHandler);
               }}
             >
               <div className="form-group">
@@ -79,8 +84,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (loginState, history) => {
-      dispatch(LoginAuthAction(loginState, history));
+    login: (loginState, history, setErrorHandler) => {
+      dispatch(LoginAuthAction(loginState, history, setErrorHandler));
     },
   };
 };

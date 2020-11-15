@@ -9,7 +9,7 @@ const AuthActionType = {
   LOGIN_FAIL: "LOGIN_FAIL",
 };
 
-const RegisterAuthAction = (userState, history) => {
+const RegisterAuthAction = (userState, history, setErrorHandler) => {
   return async (dispatch) => {
     try {
       const res = await axios.post("/register", userState);
@@ -18,17 +18,20 @@ const RegisterAuthAction = (userState, history) => {
       history.push("/");
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
         dispatch({
           type: AuthActionType.REGISTER_FAIL,
           payload: error.response.data.message,
+        });
+        setErrorHandler({
+          hasError: true,
+          message: error.response.data.message,
         });
       }
     }
   };
 };
 
-const LoginAuthAction = (loginState, history) => {
+const LoginAuthAction = (loginState, history, setErrorHandler) => {
   return async (dispatch) => {
     try {
       const res = await axios.post("/authenticate", loginState);
@@ -42,6 +45,7 @@ const LoginAuthAction = (loginState, history) => {
           payload: error.response.data.message,
         });
       }
+      setErrorHandler({ hasError: true, message: error.response.data.message });
     }
   };
 };

@@ -2,12 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { LogOutAuthAction } from "../../redux/actions/AuthAction";
+import ErrorHandler from "../error/ErrorHandler";
 
 function Header(props) {
-  const { auth, logout } = props;
+  const { auth, logout, errorHandler } = props;
   const history = useHistory();
   return (
     <div className="header d-flex justify-content-center py-2 shadow-sm">
+      <ErrorHandler
+        errorHandler={errorHandler || { hasError: false, message: "" }}
+      />
       <Link to="/">
         <h5 className="font-weight-bold text-danger mx-3">Food Delivery App</h5>
       </Link>
@@ -40,7 +44,6 @@ function Header(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     auth: state.authState,
   };
