@@ -40,8 +40,9 @@ function Header(props) {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    auth: state,
+    auth: state.authState,
   };
 };
 

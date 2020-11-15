@@ -41,11 +41,6 @@ const authreducer = (state = newAuth, action) => {
     case AuthActionType.LOGOUT_SUCCESS:
       localStorage.removeItem("auth");
       return authState;
-    case AuthActionType.LOGOUT_FAIL:
-      localStorage.removeItem("auth");
-      return authState;
-    case AuthActionType.REGISTER_FAIL:
-      return state;
 
     case AuthActionType.LOGIN_SUCCESS:
       const loginAuthState = {
@@ -57,9 +52,6 @@ const authreducer = (state = newAuth, action) => {
       ] = `Bearer ${action.payload.jwttoken}`;
       localStorage.setItem("auth", JSON.stringify(loginAuthState));
       return loginAuthState;
-
-    case AuthActionType.LOGIN_FAIL:
-      return authState;
 
     default:
       return state;

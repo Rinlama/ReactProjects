@@ -17,8 +17,13 @@ const RegisterAuthAction = (userState, history) => {
       dispatch({ type: AuthActionType.REGISTER_SUCCESS, payload: data });
       history.push("/");
     } catch (error) {
-      console.error(error);
-      dispatch({ type: AuthActionType.REGISTER_FAIL, payload: {} });
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch({
+          type: AuthActionType.REGISTER_FAIL,
+          payload: error.response.data.message,
+        });
+      }
     }
   };
 };
@@ -31,8 +36,12 @@ const LoginAuthAction = (loginState, history) => {
       dispatch({ type: AuthActionType.LOGIN_SUCCESS, payload: data });
       history.push("/");
     } catch (error) {
-      console.error(error);
-      dispatch({ type: AuthActionType.LOGIN_FAIL, payload: {} });
+      if (error.response) {
+        dispatch({
+          type: AuthActionType.LOGIN_FAIL,
+          payload: error.response.data.message,
+        });
+      }
     }
   };
 };
@@ -48,8 +57,12 @@ const LogOutAuthAction = (history) => {
       });
       history.push("/");
     } catch (error) {
-      console.error(error);
-      dispatch({ type: AuthActionType.LOGOUT_FAIL, payload: {} });
+      if (error.response) {
+        dispatch({
+          type: AuthActionType.LOGOUT_FAIL,
+          payload: error.response.data.message,
+        });
+      }
     }
   };
 };
